@@ -8,7 +8,8 @@ def test_successful_login(browser):
     login_page.login("standard_user", "secret_sauce")
     assert "inventory.html" in browser.current_url, "Login failed: inventory page not loaded"
 
-#negative parametrize log in with errros
+#negative parametrize login with errros
+@pytest.mark.negative 
 @pytest.mark.parametrize("username, password, expected_error", [
     ("locked_out_user", "secret_sauce", "locked out"), ("standard_user", "wrong_password", "do not match"), ("", "secret_sauce", "Username is required"), ("standard_user", "", "Password is required")]) 
 def test_login_negative(username, password, expected_error, browser):
